@@ -8,11 +8,11 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.boatload</groupId>
-	<artifactId>cric-tour-system</artifactId>
+	<groupId>com.cric</groupId>
+	<artifactId>cric-ground-booking-app</artifactId>
 	<version>1.0</version>
-	<name>cric-tour-system</name>
-	<description>Oranizing cricket ground booking</description>
+	<name>cric-ground-booking-app</name>
+	<description>Cricket ground booking management app</description>
 	<properties>
 		<java.version>8</java.version>
 	</properties>
