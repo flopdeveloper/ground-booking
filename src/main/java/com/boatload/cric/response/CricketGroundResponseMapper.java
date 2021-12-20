@@ -1,5 +1,7 @@
 package com.boatload.cric.response;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.boatload.cric.entity.CricketGround;
@@ -12,11 +14,14 @@ public class CricketGroundResponseMapper {
 	
 	private String message;
 	
+	private List<ErrorDetails> errors;
+	
 	public CricketGroundResponseMapper() {
 		this.data = new CricketGroundRecord();
+		this.errors = new ArrayList<ErrorDetails>();
 	}
 
-	public CricketGroundResponseMapper(Iterable<CricketGround> cricketGroundList) {
+	public CricketGroundResponseMapper(List<CricketGround> cricketGroundList) {
 		
 		this.data = new CricketGroundRecord();
 		
@@ -41,8 +46,8 @@ public class CricketGroundResponseMapper {
 	}
 
 	public CricketGroundResponseMapper(Optional<CricketGround> listCricketGround) {
-this.data = new CricketGroundRecord();
-		
+		this.data = new CricketGroundRecord();
+		this.errors = new ArrayList<ErrorDetails>();
 		if(listCricketGround!=null) {
 				CricketGroundResponse response = new CricketGroundResponse();
 				response.setId(listCricketGround.get().getId());
@@ -102,7 +107,18 @@ this.data = new CricketGroundRecord();
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
-	
+
+	/**
+	 * @return the errors
+	 */
+	public List<ErrorDetails> getErrors() {
+		return errors;
+	}
+
+	/**
+	 * @param errors the errors to set
+	 */
+	public void setErrors(List<ErrorDetails> errors) {
+		this.errors = errors;
+	}
 }

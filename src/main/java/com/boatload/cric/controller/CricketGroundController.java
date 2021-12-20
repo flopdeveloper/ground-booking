@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.boatload.cric.entity.CricketGround;
+import com.boatload.cric.common.util.CricketUtilityHelper;
+import com.boatload.cric.request.CricketGroundRequest;
 import com.boatload.cric.response.CricketGroundResponseMapper;
 import com.boatload.cric.service.CricketGroundServiceImpl;
 
@@ -27,22 +28,23 @@ public class CricketGroundController {
 	private CricketGroundServiceImpl cricketGroundService;
 	
 	@RequestMapping(value="/ground/{id}",method=RequestMethod.GET)
-	public CricketGroundResponseMapper getGroundById(@PathVariable int id){
-		return cricketGroundService.getGroundById(id);
+	public CricketGroundResponseMapper getGroundById(@PathVariable String id){
+		return CricketUtilityHelper.isValidNumeric(id)?cricketGroundService.getGroundByIdAndName(Integer.parseInt(id),""):
+			cricketGroundService.getGroundByIdAndName(0,id);
 	}
-	
+
 	@RequestMapping(value="/ground",method=RequestMethod.GET)
 	public CricketGroundResponseMapper getGroundDetails(){
 		return cricketGroundService.getGroundDetails();
 	}
 	 
 	@RequestMapping(value="/ground",method=RequestMethod.POST)
-	public CricketGroundResponseMapper createGround(@RequestBody CricketGround request){
-		return cricketGroundService.createGround(request);
+	public CricketGroundResponseMapper addGround(@RequestBody CricketGroundRequest request){
+		return cricketGroundService.addGround(request);
 	}
 	
 	@RequestMapping(value="/ground",method=RequestMethod.PUT)
-	public CricketGroundResponseMapper updateGroundDetails(@RequestBody CricketGround request){
+	public CricketGroundResponseMapper updateGroundDetails(@RequestBody CricketGroundRequest request){
 		return cricketGroundService.updateGround(request);
 	}
 	 

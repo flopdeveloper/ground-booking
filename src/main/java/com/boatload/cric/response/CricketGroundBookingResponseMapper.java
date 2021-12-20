@@ -1,5 +1,6 @@
 package com.boatload.cric.response;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.boatload.cric.entity.CricketGroundBooking;
@@ -12,6 +13,8 @@ public class CricketGroundBookingResponseMapper {
 	
 	private String message;
 	
+	private List<ErrorDetails> errors;
+	
 	public CricketGroundBookingResponseMapper() {
 		this.data = new CricketGroundBookingRecord();
 	}
@@ -23,11 +26,10 @@ public class CricketGroundBookingResponseMapper {
 		if(cricketGroundList!=null) {
 			for(CricketGroundBooking dataResponse:cricketGroundList) {
 				CricketGroundBookingResponse response = new CricketGroundBookingResponse();
-				response.setId(dataResponse.getId());
-				response.setGroundid(dataResponse.getGroundid());
-				response.setSlotfrom(dataResponse.getSlotfrom());
-				response.setSlotto(dataResponse.getSlotto());
-				response.setUserid(dataResponse.getUserid());
+				response.setId(String.valueOf(dataResponse.getId()));
+				response.setSlotFrom(dataResponse.getSlotfrom());
+				response.setSlotTo(dataResponse.getSlotto());
+				response.setUserId(dataResponse.getUserid());
 				response.setUpdateTime(dataResponse.getUpdatetime());
 				data.add(response);
 			}
@@ -39,11 +41,10 @@ public class CricketGroundBookingResponseMapper {
 		
 		if(listCricketGround!=null) {
 				CricketGroundBookingResponse response = new CricketGroundBookingResponse();
-				response.setId(listCricketGround.get().getId());
-				response.setGroundid(listCricketGround.get().getGroundid());
-				response.setSlotfrom(listCricketGround.get().getSlotfrom());
-				response.setSlotto(listCricketGround.get().getSlotto());
-				response.setUserid(listCricketGround.get().getUserid());
+				response.setId(String.valueOf(listCricketGround.get().getId()));
+				response.setSlotFrom(listCricketGround.get().getSlotfrom());
+				response.setSlotTo(listCricketGround.get().getSlotto());
+				response.setUserId(listCricketGround.get().getUserid());
 				response.setUpdateTime(listCricketGround.get().getUpdatetime());
 				data.add(response);
 		}
@@ -91,6 +92,17 @@ public class CricketGroundBookingResponseMapper {
 		this.message = message;
 	}
 	
-	
-	
+	/**
+	 * @return the errors
+	 */
+	public List<ErrorDetails> getErrors() {
+		return errors;
+	}
+
+	/**
+	 * @param errors the errors to set
+	 */
+	public void setErrors(List<ErrorDetails> errors) {
+		this.errors = errors;
+	}
 }

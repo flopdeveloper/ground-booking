@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.boatload.cric.entity.CricketGroundBooking;
 import com.boatload.cric.helper.CricketGroundBookingHelperMapper;
 import com.boatload.cric.repository.GroundBookingRepository;
+import com.boatload.cric.request.CricketGroundBookingRequest;
 import com.boatload.cric.response.CricketGroundBookingResponseMapper;
 
 @Service
@@ -18,7 +19,7 @@ public class CricketGroundBookingServiceImpl implements CricketGroundBookingServ
 	private GroundBookingRepository groundBookingRepository;
 	
 	@Autowired
-	private CricketGroundBookingHelperMapper cricketGroundHelperMapper;
+	private CricketGroundBookingHelperMapper cricketGroundBookingHelperMapper;
 	
 	@Override
 	public CricketGroundBookingResponseMapper getGroundBookingById(int groundId) {
@@ -26,7 +27,7 @@ public class CricketGroundBookingServiceImpl implements CricketGroundBookingServ
 		if(groundId!=0) {
 			listCricketGround = groundBookingRepository.findById(groundId);
 		}
-		CricketGroundBookingResponseMapper response = cricketGroundHelperMapper.generateResponseByGroundList(listCricketGround);
+		CricketGroundBookingResponseMapper response = cricketGroundBookingHelperMapper.generateResponseByGroundBookingList(listCricketGround);
 		return response;
 	}
 	
@@ -34,28 +35,41 @@ public class CricketGroundBookingServiceImpl implements CricketGroundBookingServ
 	public CricketGroundBookingResponseMapper getGroundBookingDetails() {
 		List<CricketGroundBooking> listCricketGround = null;
 		listCricketGround = (List<CricketGroundBooking>) groundBookingRepository.findAll();
-		CricketGroundBookingResponseMapper response = cricketGroundHelperMapper.generateResponseByGroundList(listCricketGround);
+		CricketGroundBookingResponseMapper response = cricketGroundBookingHelperMapper.generateResponseByGroundBookingList(listCricketGround);
 		return response;
 	}
 
 	@Override
-	public CricketGroundBookingResponseMapper createGroundBooking(CricketGroundBooking cricketGroundBookingRequest) {
-		groundBookingRepository.save(cricketGroundBookingRequest);
-		CricketGroundBookingResponseMapper response = cricketGroundHelperMapper.generateResponse();
+	public CricketGroundBookingResponseMapper createGroundBooking(CricketGroundBookingRequest cricketGroundBookingRequest) {
+		cricketGroundBookingHelperMapper.validateBookingForUpdate(cricketGroundBookingRequest);
+		CricketGroundBooking cricketGroundBooking = new CricketGroundBooking();
+		cricketGroundBooking.setGroundid(Integer.parseInt(cricketGroundBookingRequest.getGroundId()));
+		cricketGroundBooking.setSlotfrom(cricketGroundBookingRequest.getSlotFrom());
+		cricketGroundBooking.setSlotto(cricketGroundBookingRequest.getSlotTo());
+		cricketGroundBooking.setUserid(cricketGroundBookingRequest.getUserId());
+		cricketGroundBooking.setUpdatetime(cricketGroundBookingRequest.getUpdateTime());
+		groundBookingRepository.save(cricketGroundBooking);
+		CricketGroundBookingResponseMapper response = cricketGroundBookingHelperMapper.generateResponse();
 		return response;
 	}
 
 	@Override
-	public CricketGroundBookingResponseMapper updateGroundBooking(CricketGroundBooking cricketGroundBookingRequest) {
-		groundBookingRepository.save(cricketGroundBookingRequest);
-		CricketGroundBookingResponseMapper response = cricketGroundHelperMapper.generateResponse();
+	public CricketGroundBookingResponseMapper updateGroundBooking(CricketGroundBookingRequest cricketGroundBookingRequest) {
+		CricketGroundBooking cricketGroundBooking = new CricketGroundBooking();
+		cricketGroundBooking.setGroundid(Integer.parseInt(cricketGroundBookingRequest.getGroundId()));
+		cricketGroundBooking.setSlotfrom(cricketGroundBookingRequest.getSlotFrom());
+		cricketGroundBooking.setSlotto(cricketGroundBookingRequest.getSlotTo());
+		cricketGroundBooking.setUserid(cricketGroundBookingRequest.getUserId());
+		cricketGroundBooking.setUpdatetime(cricketGroundBookingRequest.getUpdateTime());
+		groundBookingRepository.save(cricketGroundBooking);
+		CricketGroundBookingResponseMapper response = cricketGroundBookingHelperMapper.generateResponse();
 		return response;
 	}
 
 	@Override
 	public CricketGroundBookingResponseMapper deleteGroundBooking(int groundId) {
 		groundBookingRepository.deleteById(groundId);
-		CricketGroundBookingResponseMapper response = cricketGroundHelperMapper.generateResponse();
+		CricketGroundBookingResponseMapper response = cricketGroundBookingHelperMapper.generateResponse();
 		return response;
 	}
 

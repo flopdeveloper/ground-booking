@@ -1,23 +1,18 @@
-/**
- * 
- */
-package com.boatload.cric.response;
+package com.boatload.cric.request;
 
-/**
- * @author WIN10USER
- *
- */
-public class CricketGroundBookingResponse {
+public class CricketGroundBookingRequest {
+	
+	  private String id;
 
-	  private String id = "";
+	  private String groundId;
 	  
-	  private String slotFrom ="";
+	  private String slotFrom;
 	  
-	  private String slotTo ="";
+	  private String slotTo;
 
-	  private String userId ="";
-
-	  private String updateTime ="";
+	  private String userId;
+	  
+	  private String updateTime;
 
 	/**
 	 * @return the id
@@ -31,6 +26,20 @@ public class CricketGroundBookingResponse {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * @return the groundId
+	 */
+	public String getGroundId() {
+		return groundId;
+	}
+
+	/**
+	 * @param groundId the groundId to set
+	 */
+	public void setGroundId(String groundId) {
+		this.groundId = groundId;
 	}
 
 	/**
@@ -62,14 +71,14 @@ public class CricketGroundBookingResponse {
 	}
 
 	/**
-	 * @return the userIdd
+	 * @return the userId
 	 */
 	public String getUserId() {
 		return userId;
 	}
 
 	/**
-	 * @param userIdd the userIdd to set
+	 * @param userId the userId to set
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -88,5 +97,4 @@ public class CricketGroundBookingResponse {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-
 }

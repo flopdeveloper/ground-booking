@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boatload.cric.entity.CricketGroundBooking;
+import com.boatload.cric.request.CricketGroundBookingRequest;
 import com.boatload.cric.response.CricketGroundBookingResponseMapper;
 import com.boatload.cric.service.CricketGroundBookingServiceImpl;
 
@@ -37,12 +38,12 @@ public class GroundBookingController {
 	}
 	 
 	@RequestMapping(value="/ground/booking",method=RequestMethod.POST)
-	public CricketGroundBookingResponseMapper createGroundBooking(@RequestBody CricketGroundBooking request){
+	public CricketGroundBookingResponseMapper createGroundBooking(@RequestBody CricketGroundBookingRequest request){
 		return cricketGroundBookingService.createGroundBooking(request);
 	}
 	
 	@RequestMapping(value="/ground/booking",method=RequestMethod.PUT)
-	public CricketGroundBookingResponseMapper updateGroundBookingDetails(@RequestBody CricketGroundBooking request){
+	public CricketGroundBookingResponseMapper updateGroundBookingDetails(@RequestBody CricketGroundBookingRequest request){
 		return cricketGroundBookingService.updateGroundBooking(request);
 	}
 	 

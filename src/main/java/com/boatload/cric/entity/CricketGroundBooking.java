@@ -15,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
  *
  */
 @Entity
-@Table(name="GROUND_BOOKING")
+@Table(name="BOOKING")
 @DynamicInsert
 @DynamicUpdate
 public class CricketGroundBooking implements Serializable{
@@ -25,7 +25,7 @@ public class CricketGroundBooking implements Serializable{
 		  @GeneratedValue(strategy = GenerationType.SEQUENCE)
 		  @Column(name="ID")
 		  private int id;
-
+		  
 		  private int groundid;
 
 		  private String slotfrom;
